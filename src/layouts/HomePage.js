@@ -1,10 +1,31 @@
 
+import { useState } from 'react'
 import classNames from 'classnames/bind'
 import styles from '../css/HomePage.module.scss'
+import Login from './components/Login'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
 
 const cx = classNames.bind(styles)
 
 function HomePage() {
+
+    const [clickLogin, setClickLogin] = useState(false)
+
+    const handleClick = () => {
+        setClickLogin(true)
+    }
+    if (clickLogin) {
+        return (
+            <Router>
+                <div className={cx('login-page')}>
+                    <Routes>
+                        <Route path='/login' element={<Login />} />
+                    </Routes>
+                </div>
+            </Router>
+        )
+    }
 
     return (
         <div className={cx('home-page')}>
@@ -12,7 +33,7 @@ function HomePage() {
             <div className={cx('nav-bar')}>
                 <div className={cx('container')}>
                     <a href="http://localhost:3000/"><img className={cx('logo')} src="https://thegardenhill.com.vn/wp-content/uploads/2021/04/logo-bidhomes-the-garden-hill.png" alt="logo" /></a>
-                    <button id={cx('login')}>Đăng nhập</button>
+                    <button id={cx('login')} onClick={handleClick}>Đăng nhập</button>
                 </div>
             </div>
 

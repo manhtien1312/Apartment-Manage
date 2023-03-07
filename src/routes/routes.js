@@ -5,13 +5,12 @@ import UserPage from '../layouts/UserPage';
 
 const publicRoutes = [
     { path: '/', component: HomePage },
-    { path: '/adminPage', component: AdminPage },
-    { path: '/userPage', component: UserPage },
 
 ]
 
 const privateRoutes = [
-
+    { path: '/adminPage', component: AdminPage },
+    { path: '/userPage', component: UserPage },
 ]
 
 export { publicRoutes, privateRoutes }
