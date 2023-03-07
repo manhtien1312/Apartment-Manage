@@ -17,13 +17,14 @@ function HomePage() {
     }
     if (clickLogin) {
         return (
-            <Router>
-                <div className={cx('login-page')}>
-                    <Routes>
-                        <Route path='/login' element={<Login />} />
-                    </Routes>
-                </div>
-            </Router>
+            <Login />
+            // <Router>
+            //     <div className={cx('login-page')}>
+            //         <Routes>
+            //             <Route path='/login' element={<Login />} />
+            //         </Routes>
+            //     </div>
+            // </Router>
         )
     }
 
