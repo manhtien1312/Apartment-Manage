@@ -3,7 +3,6 @@ import { useState } from 'react'
 import classNames from 'classnames/bind'
 import styles from '../css/HomePage.module.scss'
 import Login from './components/Login'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 
 const cx = classNames.bind(styles)
@@ -18,13 +17,6 @@ function HomePage() {
     if (clickLogin) {
         return (
             <Login />
-            // <Router>
-            //     <div className={cx('login-page')}>
-            //         <Routes>
-            //             <Route path='/login' element={<Login />} />
-            //         </Routes>
-            //     </div>
-            // </Router>
         )
     }
 

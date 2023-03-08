@@ -10,15 +10,15 @@ function App() {
         <Routes>
           {
             publicRoutes.map((route, index) => {
-              const Page = route.component
-              return <Route key={index} path={route.path} element={<Page />} />
+              const PublicPage = route.component
+              return <Route key={index} path={route.path} element={<PublicPage />} />
             })
           }
 
           {
             privateRoutes.map((route, index) => {
-              const Page = route.component
-              return <Route key={index} path={route.path} element={<Page />} />
+              const PrivatePage = route.component
+              return <Route key={index} path={route.path} element={<PrivatePage />} />
             })
           }
         </Routes>

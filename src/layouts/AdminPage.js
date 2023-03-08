@@ -1,8 +1,15 @@
 
+import classNames from "classnames/bind";
+import styles from '../css/AdminPage.module.scss'
+import Header from "./components/Header";
+
+const cx = classNames.bind(styles)
 
 function AdminPage() {
     return (
-        <h2>Admin Page</h2>
+
+        <Header />
+
     );
 }
 
