@@ -1,7 +1,11 @@
 
+import config from '../../config'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import styles from '../../css/Login.module.scss'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 const cx = classNames.bind(styles)
 
@@ -30,6 +34,9 @@ function Login() {
 
         <div className={cx('body')}>
             <div className={cx('login-wrapper')}>
+                <Link id={cx('exit-login')} to={config.routes.home}>
+                    <FontAwesomeIcon icon={faXmark} />
+                </Link>
                 <h1>Đăng Nhập</h1>
                 <form>
                     <div className={cx('login-mode')}>
@@ -51,7 +58,7 @@ function Login() {
                             <input type="password" placeholder='Mật khẩu' onChange={e => setPassword(e.target.value)} />
                         </label>
                         <br></br>
-                        <a href=''>Quên mật khẩu?</a>
+                        <Link to={config.routes.forgot}>Quên mật khẩu?</Link>
                     </div>
                     <div className={cx('btn')}>
                         <button type="submit" onClick={handleSubmit}>Đăng nhập</button>

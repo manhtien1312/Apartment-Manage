@@ -13,8 +13,19 @@
   color: #c2ead5;
   background-color: var(--primary-color);
 
+  #exit-login {
+    margin-left: 350px;
+    font-weight: 700;
+    font-size: 40px;
+    color: #c2ead5;
+
+    :hover {
+      color: #551a8b;
+    }
+  }
+
   h1 {
-    margin: 20% 0 8%;
+    margin: 10% 0 8%;
   }
 
   .login-mode {
@@ -23,6 +34,7 @@
 
     div {
       margin-right: 20px;
+      font-weight: 550;
     }
 
     input {

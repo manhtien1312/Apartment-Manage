@@ -1,24 +1,13 @@
 
-import { useState } from 'react'
+import config from '../config'
+import { Link } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import styles from '../css/HomePage.module.scss'
-import Login from './components/Login'
 
 
 const cx = classNames.bind(styles)
 
 function HomePage() {
-
-    const [clickLogin, setClickLogin] = useState(false)
-
-    const handleClick = () => {
-        setClickLogin(true)
-    }
-    if (clickLogin) {
-        return (
-            <Login />
-        )
-    }
 
     return (
         <div className={cx('home-page')}>
@@ -26,7 +15,7 @@ function HomePage() {
             <div className={cx('nav-bar')}>
                 <div className={cx('container')}>
                     <a href="http://localhost:3000/"><img className={cx('logo')} src="https://thegardenhill.com.vn/wp-content/uploads/2021/04/logo-bidhomes-the-garden-hill.png" alt="logo" /></a>
-                    <button id={cx('login')} onClick={handleClick}>Đăng nhập</button>
+                    <Link id={cx('login')} to={config.routes.login} >Đăng nhập</Link>
                 </div>
             </div>
 

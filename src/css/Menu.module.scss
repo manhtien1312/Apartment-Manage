@@ -1,0 +1,25 @@
+.menu-wrapper {
+  padding-top: 20px;
+}
+
+.menu-item {
+  padding: 2.1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: large;
+  font-weight: 600;
+  transition: background-color ease-in-out 200ms;
+
+  &.active {
+    background-color: #c2ead5;
+    color: #551a8b;
+  }
+
+  &:hover {
+    background-color: #c2ead5;
+    color: #551a8b;
+  }
+}
