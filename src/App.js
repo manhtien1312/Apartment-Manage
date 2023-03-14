@@ -24,15 +24,15 @@ function App() {
 
           {
             adminRoutes.map((route, index) => {
-              const AdminPage = route.component
-              return <Route key={index} path={route.path} element={<AdminPage />} />
+              const ManagePage = route.component
+              return <Route key={index} path={route.path} element={<ManagePage />} />
             })
           }
 
           {
             userRoutes.map((route, index) => {
-              const UserPage = route.component
-              return <Route key={index} path={route.path} element={<UserPage />} />
+              const ResidentPage = route.component
+              return <Route key={index} path={route.path} element={<ResidentPage />} />
             })
           }
         </Routes>

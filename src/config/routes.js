@@ -3,14 +3,14 @@ const routes = {
     home: '/',
     login: '/login',
     forgot: '/forgot',
-    admin: '/admin',
-    user: '/user',
-    adApartment: '/admin/apartments',
-    resident: '/admin/residents',
-    employee: '/admin/employees',
-    adService: '/admin/services',
-    usApartment: '/user/apartment',
-    usService: '/user/service',
+    manage: '/manage',
+    resident: '/resident',
+    manageApartment: '/manage/apartments',
+    manageResident: '/manage/residents',
+    manageEmployee: '/manage/employees',
+    manageService: '/manage/services',
+    residentApartment: '/resident/apartment',
+    residentService: '/resident/service',
 
 }
 

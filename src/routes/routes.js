@@ -1,15 +1,15 @@
 
 import config from '../config'
 import HomePage from '../layouts/HomePage';
-import AdminPage from '../layouts/AdminPage';
-import UserPage from '../layouts/UserPage';
+import ManagePage from '../layouts/ManagePage';
+import ResidentPage from '../layouts/ResidentPage';
 import Login from '../layouts/components/Login';
-import AdApartment from '../layouts/components/AdApartment'
-import Resident from '../layouts/components/Resident'
-import Employee from '../layouts/components/Employee'
-import AdService from '../layouts/components/AdService'
-import UsApartment from '../layouts/components/UsApartment'
-import UsService from '../layouts/components/UsService'
+import ManageApartment from '../layouts/ManageApartment'
+import ManageResident from '../layouts/ManageResident'
+import ManageEmployee from '../layouts/ManageEmployee'
+import ManageService from '../layouts/ManageService'
+import ResidentApartment from '../layouts/ResidentApartment'
+import ResidentService from '../layouts/ResidentService'
 
 const publicRoutes = [
     { path: config.routes.home, component: HomePage },
@@ -18,20 +18,20 @@ const publicRoutes = [
 ]
 
 const privateRoutes = [
-    { path: config.routes.admin, component: AdminPage },
-    { path: config.routes.user, component: UserPage },
+    { path: config.routes.manage, component: ManagePage },
+    { path: config.routes.resident, component: ResidentPage },
 ]
 
 const adminRoutes = [
-    { title: 'Quản lý mặt bằng', path: config.routes.adApartment, component: AdApartment },
-    { title: 'Quản lý cư dân', path: config.routes.resident, component: Resident },
-    { title: 'Quản lý nhân viên', path: config.routes.employee, component: Employee },
-    { title: 'Quản lý dịch vụ', path: config.routes.adService, component: AdService },
+    { title: 'Quản lý mặt bằng', path: config.routes.manageApartment, component: ManageApartment },
+    { title: 'Quản lý cư dân', path: config.routes.manageResident, component: ManageResident },
+    { title: 'Quản lý nhân viên', path: config.routes.manageEmployee, component: ManageEmployee },
+    { title: 'Quản lý dịch vụ', path: config.routes.manageService, component: ManageService },
 ]
 
 const userRoutes = [
-    { title: 'Thông tin căn hộ', path: config.routes.usApartment, component: UsApartment },
-    { title: 'Hóa đơn dịch vụ', path: config.routes.usService, component: UsService },
+    { title: 'Thông tin căn hộ', path: config.routes.residentApartment, component: ResidentApartment },
+    { title: 'Hóa đơn dịch vụ', path: config.routes.residentService, component: ResidentService },
 ]
 
 
