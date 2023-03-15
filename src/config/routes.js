@@ -3,6 +3,7 @@ const routes = {
     home: '/',
     login: '/login',
     forgot: '/forgot',
+    changePassword: '/change-password',
     manage: '/manage',
     resident: '/resident',
     manageApartment: '/manage/apartments',

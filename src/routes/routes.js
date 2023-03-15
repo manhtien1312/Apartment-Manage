@@ -4,6 +4,8 @@ import HomePage from '../layouts/HomePage';
 import ManagePage from '../layouts/ManagePage';
 import ResidentPage from '../layouts/ResidentPage';
 import Login from '../layouts/components/Login';
+import Forgot from '../layouts/components/Forgot';
+import ChangePassword from '../layouts/components/ChangePassword';
 import ManageApartment from '../layouts/ManageApartment'
 import ManageResident from '../layouts/ManageResident'
 import ManageEmployee from '../layouts/ManageEmployee'
@@ -14,12 +16,14 @@ import ResidentService from '../layouts/ResidentService'
 const publicRoutes = [
     { path: config.routes.home, component: HomePage },
     { path: config.routes.login, component: Login },
+    { path: config.routes.forgot, component: Forgot },
 
 ]
 
 const privateRoutes = [
     { path: config.routes.manage, component: ManagePage },
     { path: config.routes.resident, component: ResidentPage },
+    { path: config.routes.changePassword, component: ChangePassword },
 ]
 
 const adminRoutes = [
