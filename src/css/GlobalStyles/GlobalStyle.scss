@@ -26,4 +26,8 @@ button,
 input {
   border: none;
   outline: none;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
