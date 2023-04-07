@@ -10,6 +10,7 @@ import ManageApartment from '../layouts/ManageApartment'
 import ManageResident from '../layouts/ManageResident'
 import ManageEmployee from '../layouts/ManageEmployee'
 import ManageService from '../layouts/ManageService'
+import BillDetail from '../layouts/components/BillDetail';
 import ResidentApartment from '../layouts/ResidentApartment'
 import ResidentService from '../layouts/ResidentService'
 
@@ -24,6 +25,7 @@ const privateRoutes = [
     { path: config.routes.manage, component: ManagePage },
     { path: config.routes.resident, component: ResidentPage },
     { path: config.routes.changePassword, component: ChangePassword },
+    { path: config.routes.billDetail, component: BillDetail },
 ]
 
 const adminRoutes = [

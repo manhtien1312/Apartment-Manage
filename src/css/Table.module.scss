@@ -1,22 +1,38 @@
 table {
   margin-top: 20px;
+  margin-bottom: 40px;
   border: 2px solid forestgreen;
+  background: rgba(22, 24, 35, 0.06);
   width: 90%;
 }
 
 th {
+  border-right: 1px solid black;
   border-bottom: 1px solid black;
   height: 50px;
 }
 
 td {
   border-bottom: 1px solid black;
+  border-right: 1px solid black;
   text-align: center;
   padding: 20px 0;
+
+  button {
+    background: rgba(22, 24, 35, 0.06);
+  }
+
+  button:hover {
+    background-color: #fff;
+  }
 }
 
 button {
   background-color: #fff;
   padding: 5px;
   border: 1px solid black;
+
+  &:hover {
+    background: rgba(22, 24, 35, 0.06);
+  }
 }
