@@ -1,6 +1,6 @@
 
 import classNames from "classnames/bind";
-import styles from '../css/ManagePage.module.scss'
+import styles from '../css/Manage.module.scss'
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 import Workspace from "./components/Workspace";
@@ -13,7 +13,9 @@ function ManagePage() {
     return (
 
         <>
-            <Workspace />
+            <Workspace>
+                <h1 className={cx('title')}>Thông báo</h1>
+            </Workspace>
 
             <SideBar routes={adminRoutes} />
 
