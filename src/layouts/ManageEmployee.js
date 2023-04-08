@@ -1,9 +1,12 @@
 
+import { useState } from 'react';
 import Header from './components/Header';
 import SideBar from "./components/SideBar";
 import Workspace from './components/Workspace';
 import Search from './components/Search';
 import Table from './components/Table';
+import AdjustEmployee from './components/AdjustEmployee';
+import PopupModal from './components/PopupModal';
 import { adminRoutes } from '../routes/routes';
 import config from '../config';
 
@@ -32,12 +35,18 @@ function ManageEmployee() {
         }
     }
 
+    const [modal, setModal] = useState(false);
+
+    const toggleModal = () => {
+        setModal(!modal)
+    }
+
     return (
         <>
             <Workspace>
                 <h1 className={cx('title')}>Danh Sách Nhân Viên</h1>
                 <Search placeholder="Tìm kiếm" onClick={handleSearch} onKeyDown={handleKeyPress} />
-                <button className={cx('add')}>Thêm nhân viên</button>
+                <button onClick={toggleModal} className={cx('add')}>Thêm nhân viên</button>
                 <Table listHead={listHead}>
                     {
                         listRow.map((row, index) => {
@@ -49,12 +58,18 @@ function ManageEmployee() {
                                     <td>{row.address}</td>
                                     <td>{row.phoneNum}</td>
                                     <td>{row.position}</td>
-                                    <td><button>Thay đổi</button></td>
+                                    <td><button onClick={toggleModal}>Thay đổi</button></td>
                                 </tr>
                             )
                         })
                     }
                 </Table>
+
+                {
+                    modal &&
+                    <PopupModal onClick={toggleModal} content={<AdjustEmployee onClick={toggleModal} />} />
+                }
+
             </Workspace>
 
             <SideBar routes={adminRoutes} />

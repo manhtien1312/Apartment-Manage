@@ -7,17 +7,22 @@ const cx = classNames.bind(styles)
 function Table({ listHead, children }) {
     return (
         <table>
-            <tr>
-                {
-                    listHead.map((head, index) => {
-                        return (
-                            <th key={index}>{head}</th>
-                        )
-                    })
-                }
-                <th></th>
-            </tr>
-            {children}
+            <thead>
+                <tr>
+                    {
+                        listHead.map((head, index) => {
+                            return (
+                                <th key={index}>{head}</th>
+                            )
+                        })
+                    }
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {children}
+            </tbody>
+
 
         </table>
     );

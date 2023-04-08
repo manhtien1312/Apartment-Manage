@@ -1,7 +1,7 @@
 
 import Header from '../components/Header';
 import SideBar from "../components/SideBar";
-import Workspace from '../components/Workspace';
+import Workspace from './Workspace';
 import { adminRoutes } from "../../routes/routes";
 import config from '../../config';
 import Table from './Table';

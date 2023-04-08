@@ -1,14 +1,17 @@
 
+import { useState } from 'react';
 import Header from './components/Header';
 import SideBar from "./components/SideBar";
 import Workspace from './components/Workspace';
 import Search from './components/Search';
+import Table from './components/Table';
+import PopupModal from './components/PopupModal';
+import AdjustApartment from './components/AdjustApartment';
 import { adminRoutes } from '../routes/routes';
 import config from '../config';
 
 import classNames from 'classnames/bind';
 import styles from '../css/Manage.module.scss';
-import Table from './components/Table';
 
 const cx = classNames.bind(styles);
 
@@ -32,6 +35,12 @@ function ManageApartment() {
         }
     }
 
+    const [modal, setModal] = useState(false);
+
+    const toggleModal = () => {
+        setModal(!modal)
+    }
+
     return (
         <>
             <Workspace >
@@ -47,12 +56,17 @@ function ManageApartment() {
                                     <td>{row.rooms}</td>
                                     <td>{row.status}</td>
                                     <td>{row.owner}</td>
-                                    <td><button>Thay đổi</button></td>
+                                    <td><button onClick={toggleModal}>Thay đổi</button></td>
                                 </tr>
                             )
                         })
                     }
                 </Table>
+
+                {
+                    modal &&
+                    <PopupModal onClick={toggleModal} content={<AdjustApartment onClick={toggleModal} />} />
+                }
             </Workspace>
 
             <SideBar routes={adminRoutes} />
