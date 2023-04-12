@@ -6,12 +6,16 @@ import Workspace from './components/Workspace';
 import Search from './components/Search';
 import Table from './components/Table';
 import AdjustEmployee from './components/AdjustEmployee';
+import Confirm from './components/Confirm';
 import PopupModal from './components/PopupModal';
 import { adminRoutes } from '../routes/routes';
 import config from '../config';
 
 import classNames from 'classnames/bind';
 import styles from '../css/Manage.module.scss'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -35,10 +39,19 @@ function ManageEmployee() {
         }
     }
 
+    const handleDelete = () => {
+
+    }
+
     const [modal, setModal] = useState(false);
+    const [confirmModal, setConfirmModal] = useState(false);
 
     const toggleModal = () => {
         setModal(!modal)
+    }
+
+    const toggleConfirmModal = () => {
+        setConfirmModal(!confirmModal)
     }
 
     return (
@@ -58,7 +71,9 @@ function ManageEmployee() {
                                     <td>{row.address}</td>
                                     <td>{row.phoneNum}</td>
                                     <td>{row.position}</td>
-                                    <td><button onClick={toggleModal}>Thay đổi</button></td>
+                                    <td><button onClick={toggleModal}>Thay đổi</button>
+                                        <button onClick={toggleConfirmModal} ><FontAwesomeIcon icon={faTrashCan} /></button>
+                                    </td>
                                 </tr>
                             )
                         })
@@ -68,6 +83,11 @@ function ManageEmployee() {
                 {
                     modal &&
                     <PopupModal onClick={toggleModal} content={<AdjustEmployee onClick={toggleModal} />} />
+                }
+
+                {
+                    confirmModal &&
+                    <PopupModal onClick={toggleConfirmModal} content={<Confirm onClick={toggleConfirmModal} handleDelete={handleDelete} />} />
                 }
 
             </Workspace>

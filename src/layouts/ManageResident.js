@@ -7,11 +7,15 @@ import Search from './components/Search';
 import Table from './components/Table';
 import PopupModal from './components/PopupModal';
 import AdjustResident from './components/AdjustResident';
+import Confirm from './components/Confirm';
 import { adminRoutes } from '../routes/routes';
 import config from '../config';
 
 import classNames from 'classnames/bind';
 import styles from '../css/Manage.module.scss'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -36,10 +40,19 @@ function ManageResident() {
         }
     }
 
+    const handleDelete = () => {
+
+    }
+
     const [modal, setModal] = useState(false);
+    const [confirmModal, setConfirmModal] = useState(false);
 
     const toggleModal = () => {
         setModal(!modal)
+    }
+
+    const toggleConfirmModal = () => {
+        setConfirmModal(!confirmModal)
     }
 
     return (
@@ -59,7 +72,9 @@ function ManageResident() {
                                     <td>{row.doB}</td>
                                     <td>{row.phoneNum}</td>
                                     <td>{row.position}</td>
-                                    <td><button onClick={toggleModal}>Thay đổi</button></td>
+                                    <td><button onClick={toggleModal}>Thay đổi</button>
+                                        <button onClick={toggleConfirmModal}><FontAwesomeIcon icon={faTrashCan} /></button>
+                                    </td>
                                 </tr>
                             )
                         })
@@ -69,6 +84,11 @@ function ManageResident() {
                 {
                     modal &&
                     <PopupModal onClick={toggleModal} content={<AdjustResident onClick={toggleModal} />} />
+                }
+
+                {
+                    confirmModal &&
+                    <PopupModal onClick={toggleConfirmModal} content={<Confirm onClick={toggleConfirmModal} handleDelete={handleDelete} />} />
                 }
             </Workspace>
 

@@ -1,12 +1,11 @@
-.wrapper {
-  width: 600px;
-  height: 630px;
+.content {
+  margin: 50% 0 0 50%;
+  width: 400px;
+  height: 200px;
+  background-color: var(--primary-color);
   display: flex;
-  margin: 40% 0 0 30%;
   flex-direction: column;
   align-items: center;
-  color: #c2ead5;
-  background-color: var(--primary-color);
 
   #exit {
     background-color: transparent;
@@ -22,34 +21,15 @@
     }
   }
 
-  h1 {
+  h3 {
+    color: #c2ead5;
     margin: 0 0 8%;
   }
 
-  .info {
-    input,
-    select {
-      width: 250px;
-      height: 30px;
-      margin-bottom: 10px;
-      padding: 0 10px 0 10px;
-      border-radius: 5px;
-    }
-
-    label {
-      display: flex;
-      justify-content: space-between;
-    }
-  }
-
-  p {
-    color: rgba(95, 13, 13, 1);
-    font-size: small;
-  }
-
   .btn {
+    width: 80%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 
     button {
       margin-top: 5%;

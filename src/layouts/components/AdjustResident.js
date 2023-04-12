@@ -8,7 +8,7 @@ import styles from "../../css/AddEntry.module.scss"
 
 const cx = classNames.bind(styles);
 
-function AdjustResident({ onClick }) {
+function AdjustResident({ onClick, mode }) {
 
     const [houseNum, setHouseNum] = useState("");
     const [name, setName] = useState("")
@@ -18,7 +18,7 @@ function AdjustResident({ onClick }) {
     const [relative, setRelative] = useState("");
 
     const handleSubmit = () => {
-        console.log(houseNum, name, gender, doB, phoneNum, relative)
+        // console.log(houseNum, name, gender, doB, phoneNum, relative)
     }
 
     return (
@@ -59,7 +59,7 @@ function AdjustResident({ onClick }) {
                         <br></br>
                     </div>
                     <div className={cx('btn')}>
-                        <button type="submit" onClick={handleSubmit}>Xác nhận</button>
+                        <button id={cx('change')} type="submit" onClick={handleSubmit}>Xác nhận</button>
                     </div>
                 </form>
             </div >
