@@ -12,7 +12,7 @@ const cx = classNames.bind(styles)
 function ManagePage() {
     return (
 
-        <>
+        <div className={cx('container')}>
             <Workspace>
                 <h1 className={cx('title')}>Thông báo</h1>
             </Workspace>
@@ -21,7 +21,7 @@ function ManagePage() {
 
             <Header to={config.routes.manage} />
 
-        </>
+        </div>
 
     );
 }

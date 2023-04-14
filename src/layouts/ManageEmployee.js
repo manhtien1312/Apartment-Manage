@@ -55,7 +55,7 @@ function ManageEmployee() {
     }
 
     return (
-        <>
+        <div className={cx('container')}>
             <Workspace>
                 <h1 className={cx('title')}>Danh Sách Nhân Viên</h1>
                 <Search placeholder="Tìm kiếm" onClick={handleSearch} onKeyDown={handleKeyPress} />
@@ -96,7 +96,7 @@ function ManageEmployee() {
 
             <Header to={config.routes.manage} />
 
-        </>
+        </div>
     );
 }
 

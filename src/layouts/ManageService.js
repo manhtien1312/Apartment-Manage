@@ -1,9 +1,12 @@
 
+import { useState } from 'react';
 import Header from './components/Header';
 import SideBar from "./components/SideBar";
 import Workspace from './components/Workspace';
 import Search from './components/Search';
 import Table from './components/Table';
+import PopupModal from './components/PopupModal';
+import CreateBill from "./components/CreateBill"
 import { adminRoutes } from '../routes/routes';
 import config from '../config';
 
@@ -32,8 +35,14 @@ function ManageService() {
         }
     }
 
+    const [modal, setModal] = useState(false);
+
+    const toggleModal = () => {
+        setModal(!modal)
+    }
+
     return (
-        <>
+        <div className={cx('container')}>
             <Workspace>
                 <h1 className={cx('title')}>Danh Sách hóa đơn dịch vụ</h1>
                 <Search onClick={handleSearch} onKeyDown={handleKeyPress} />
@@ -45,19 +54,25 @@ function ManageService() {
                                     <td>{row.houseNum}</td>
                                     <td><Link to={config.routes.billDetail}>{row.billName}</Link></td>
                                     <td>{row.status}</td>
-                                    <td><button>Tạo hóa đơn</button></td>
+                                    <td><button onClick={toggleModal}>Tạo hóa đơn</button></td>
                                 </tr>
                             )
                         })
                     }
                 </Table>
+
+                {
+                    modal &&
+                    <PopupModal onClick={toggleModal} content={<CreateBill onClick={toggleModal} />} />
+                }
+
             </Workspace>
 
             <SideBar routes={adminRoutes} />
 
             <Header to={config.routes.manage} />
 
-        </>
+        </div>
     );
 }
 

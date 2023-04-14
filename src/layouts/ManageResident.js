@@ -56,7 +56,7 @@ function ManageResident() {
     }
 
     return (
-        <>
+        <div className={cx('container')}>
             <Workspace>
                 <h1 className={cx('title')}>Danh Sách Cư dân</h1>
                 <Search onClick={handleSearch} onKeyDown={handleKeyPress} />
@@ -96,7 +96,7 @@ function ManageResident() {
 
             <Header to={config.routes.manage} />
 
-        </>
+        </div>
     );
 }
 

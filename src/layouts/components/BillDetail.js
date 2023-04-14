@@ -21,15 +21,15 @@ function ResidentApartment() {
         { name: "Phí gửi xe đạp", desc: "", unit: "Chiếc", quantity: "", unitPrice: 30000, total: "" },
         { name: "Phí dịch vụ căn hộ", desc: "", unit: "m2", quantity: "", unitPrice: 6500, total: "" },
         { name: "Tiền nước sinh hoạt", desc: "", unit: "m3", quantity: "", unitPrice: 6869, total: "" },
-        { name: "Tiền nước nóng", desc: "", unit: "m3", quantity: "", unitPrice: 43500, total: "" },
         { name: "Tiền điện", desc: "", unit: "kwh", quantity: "", unitPrice: 3500, total: "" },
     ]
 
     return (
-        <>
+        <div className={cx('container')}>
             <Workspace>
                 <h1 className={cx('title')}>Hóa đơn tháng { }</h1>
                 <h3>Căn hộ: { }</h3>
+                <button className={cx('add')}>Sửa hóa đơn</button>
                 <Table listHead={listHead}>
                     {
                         listRow.map((row, index) => {
@@ -68,7 +68,7 @@ function ResidentApartment() {
 
             <Header to={config.routes.manage} />
 
-        </>
+        </div>
     );
 }
 

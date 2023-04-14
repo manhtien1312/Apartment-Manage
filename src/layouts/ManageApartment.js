@@ -42,7 +42,7 @@ function ManageApartment() {
     }
 
     return (
-        <>
+        <div className={cx('container')}>
             <Workspace >
                 <h1 className={cx('title')}>Danh Sách Căn Hộ</h1>
                 <Search placeholder="Tìm kiếm số căn hộ" onClick={handleSearch} onKeyDown={handleKeyPress} />
@@ -74,7 +74,7 @@ function ManageApartment() {
             <Header to={config.routes.manage} />
 
 
-        </>
+        </div>
     );
 }
 
