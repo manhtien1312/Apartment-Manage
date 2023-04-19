@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -8,16 +8,21 @@ import styles from '../../css/AddEntry.module.scss';
 
 const cx = classNames.bind(styles);
 
-function AdjustApartment({ onClick }) {
+function AdjustApartment({ onClick, id }) {
 
-    const [houseNum, setHouseNum] = useState("");
-    const [area, setArea] = useState();
-    const [rooms, setRooms] = useState();
-    const [status, setstatus] = useState("Chưa bàn giao");
-    const [owner, setOwner] = useState("");
+    const [apartment, setApartment] = useState({});
+
+    useEffect(() => {
+        if (id !== "") {
+            fetch(`http://localhost:8080/apartment/${id}`)
+                .then(res => res.json())
+                .then(data => setApartment(data))
+                .catch(err => console.log(err))
+        }
+    }, []);
 
     const handleSubmit = () => {
-        console.log(houseNum, area, rooms, status, owner)
+        console.log(apartment)
     }
 
     return (
@@ -30,32 +35,36 @@ function AdjustApartment({ onClick }) {
                 <form>
                     <div className={cx('info')}>
                         <label>Số căn hộ:
-                            <input type="text" onChange={e => setHouseNum(e.target.value)} />
+                            <input type="text" defaultValue={apartment.apartmentId}
+                                onChange={e => setApartment({ ...apartment, apartmentId: e.target.value })} />
                         </label>
                         <br></br>
                         <label>Diện tích:
-                            <input type="number" onChange={e => setArea(e.target.value)} />
+                            <input type="number" defaultValue={apartment.area}
+                                onChange={e => setApartment({ ...apartment, area: e.target.value })} />
                         </label>
                         <br></br>
                         <label>Số phòng:
-                            <input type="number" onChange={e => setRooms(e.target.value)} />
+                            <input type="number" defaultValue={apartment.rooms}
+                                onChange={e => setApartment({ ...apartment, rooms: e.target.value })} />
                         </label>
                         <br></br>
                         <label>Tình trạng:
-                            <select value={status} onChange={e => setstatus(e.target.value)}>
-                                <option value="Chưa bàn giao">Chưa bàn giao</option>
+                            <select value={apartment.status} onChange={e => setApartment({ ...apartment, status: e.target.value })}>
                                 <option value="Đã bán">Đã bán</option>
                                 <option value="Đã thuê">Đã thuê</option>
+                                <option value="Chưa bàn giao">Chưa bàn giao</option>
                             </select>
                         </label>
                         <br></br>
                         <label>Chủ hộ:
-                            <input type="text" onChange={e => setOwner(e.target.value)} />
+                            <input type="text" defaultValue={apartment.owner}
+                                onChange={e => setApartment({ ...apartment, owner: e.target.value })} />
                         </label>
                         <br></br>
                     </div>
                     <div className={cx('btn')}>
-                        <button type="submit" onClick={handleSubmit}>Xác nhận</button>
+                        <button onClick={handleSubmit}>Xác nhận</button>
                     </div>
                 </form>
             </div >

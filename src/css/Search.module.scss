@@ -14,28 +14,4 @@
     height: 100%;
     background-color: transparent;
   }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 9px;
-    right: 13%;
-    width: 1px;
-    height: 28px;
-    background-color: rgba(22, 24, 35, 0.12);
-  }
-
-  .search-btn {
-    width: 13%;
-    height: 100%;
-    border-top-right-radius: 92px;
-    border-bottom-right-radius: 92px;
-    font-size: 1.8rem;
-    background-color: transparent;
-
-    &:hover {
-      cursor: pointer;
-      background-color: rgba(22, 24, 35, 0.03);
-    }
-  }
 }

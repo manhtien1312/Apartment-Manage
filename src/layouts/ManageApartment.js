@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import SideBar from "./components/SideBar";
 import Workspace from './components/Workspace';
@@ -19,21 +19,31 @@ function ManageApartment() {
 
     // Lấy thông tin từ BE
     const listHead = ["Số căn hộ", "Diện tích (m2)", "Số phòng", "Tình trạng", "Chủ hộ"]
-    const listRow = [
-        { num: "A0803", area: 80, rooms: 5, status: "Đã bán", owner: "Nguyễn Văn An" },
-        { num: "A0804", area: 70, rooms: 4, status: "Chưa bàn giao", owner: "" },
-        { num: "A0805", area: 70, rooms: 4, status: "Đã thuê", owner: "Bùi Thị Xuân" },
-    ]
+    const [apartments, setApartments] = useState([]);
+    const [id, setId] = useState("");
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:8080/apartments')
+            .then((res) => res.json())
+            .then((data) => {
+                setApartments(data);
+                setData(data)
+            })
+            .catch((err) => console.log(err))
+    }, []);
 
-    const handleSearch = () => {
-
-    }
-
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            handleSearch()
+    const [searchText, setSearchText] = useState("");
+    useEffect(() => {
+        if (searchText === "") setApartments(data)
+        else {
+            setApartments(
+                apartments.filter((apartment) => {
+                    if (apartment.apartmentId.toLowerCase().includes(searchText.toLowerCase())) return apartment;
+                    else return null;
+                })
+            )
         }
-    }
+    }, [searchText])
 
     const [modal, setModal] = useState(false);
 
@@ -45,18 +55,21 @@ function ManageApartment() {
         <div className={cx('container')}>
             <Workspace >
                 <h1 className={cx('title')}>Danh Sách Căn Hộ</h1>
-                <Search placeholder="Tìm kiếm số căn hộ" onClick={handleSearch} onKeyDown={handleKeyPress} />
+                <Search placeholder="Tìm kiếm số căn hộ" onChange={e => setSearchText(e.target.value)} />
                 <Table listHead={listHead}>
                     {
-                        listRow.map((row, index) => {
+                        apartments.map((apartment, index) => {
                             return (
                                 <tr key={index}>
-                                    <td>{row.num}</td>
-                                    <td>{row.area}</td>
-                                    <td>{row.rooms}</td>
-                                    <td>{row.status}</td>
-                                    <td>{row.owner}</td>
-                                    <td><button onClick={toggleModal}>Thay đổi</button></td>
+                                    <td>{apartment.apartmentId}</td>
+                                    <td>{apartment.area}</td>
+                                    <td>{apartment.rooms}</td>
+                                    <td>{apartment.status}</td>
+                                    <td>{apartment.owner}</td>
+                                    <td><button onClick={() => {
+                                        setId(apartment.apartmentId)
+                                        setModal(!modal)
+                                    }}>Thay đổi</button></td>
                                 </tr>
                             )
                         })
@@ -65,7 +78,7 @@ function ManageApartment() {
 
                 {
                     modal &&
-                    <PopupModal onClick={toggleModal} content={<AdjustApartment onClick={toggleModal} />} />
+                    <PopupModal onClick={toggleModal} content={<AdjustApartment id={id} onClick={toggleModal} />} />
                 }
             </Workspace>
 
