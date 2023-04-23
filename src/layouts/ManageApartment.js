@@ -37,7 +37,7 @@ function ManageApartment() {
         if (searchText === "") setApartments(data)
         else {
             setApartments(
-                apartments.filter((apartment) => {
+                data.filter((apartment) => {
                     if (apartment.apartmentId.toLowerCase().includes(searchText.toLowerCase())) return apartment;
                     else return null;
                 })
@@ -55,7 +55,7 @@ function ManageApartment() {
         <div className={cx('container')}>
             <Workspace >
                 <h1 className={cx('title')}>Danh Sách Căn Hộ</h1>
-                <Search placeholder="Tìm kiếm số căn hộ" onChange={e => setSearchText(e.target.value)} />
+                <Search placeholder="Tìm kiếm" onChange={e => setSearchText(e.target.value)} />
                 <Table listHead={listHead}>
                     {
                         apartments.map((apartment, index) => {

@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -8,17 +8,19 @@ import styles from '../../css/AddEntry.module.scss';
 
 const cx = classNames.bind(styles);
 
-function AdjustEmployee({ onClick }) {
+function AdjustEmployee({ onClick, id }) {
 
-    const [name, setName] = useState("");
-    const [gender, setGender] = useState("Nam");
-    const [doB, setDoB] = useState();
-    const [address, setAddress] = useState("");
-    const [phoneNum, setPhoneNum] = useState("");
-    const [position, setPosition] = useState("");
+    const [employee, setEmployee] = useState({});
+
+    useEffect(() => {
+        fetch(`http://localhost:8080/employee/${id}`)
+            .then(res => res.json())
+            .then(data => setEmployee(data))
+            .catch(err => console.log(err))
+    }, [])
 
     const handleSubmit = () => {
-        // console.log(name, gender, doB, address, phoneNum, position)
+        console.log(employee)
     }
 
     return (
@@ -31,30 +33,36 @@ function AdjustEmployee({ onClick }) {
                 <form>
                     <div className={cx('info')}>
                         <label>Tên đầy đủ:
-                            <input type="text" onChange={e => setName(e.target.value)} />
+                            <input type="text" defaultValue={employee.name}
+                                onChange={e => setEmployee({ ...employee, name: e.target.value })} />
                         </label>
                         <br></br>
                         <label>Giới tính:
-                            <select value={gender} onChange={e => setGender(e.target.value)}>
+                            <select defaultValue={employee.gender}
+                                onChange={e => setEmployee({ ...employee, gender: e.target.value })}>
                                 <option value="Nam">Nam</option>
                                 <option value="Nữ">Nữ</option>
                             </select>
                         </label>
                         <br></br>
                         <label>Ngày sinh:
-                            <input type="date" onChange={e => setDoB(e.target.value)} />
+                            <input type="date" defaultValue={employee.dob}
+                                onChange={e => setEmployee({ ...employee, dob: e.target.value })} />
                         </label>
                         <br></br>
                         <label>Địa chỉ:
-                            <input type="text" onChange={e => setAddress(e.target.value)} />
+                            <input type="text" defaultValue={employee.address}
+                                onChange={e => setEmployee({ ...employee, address: e.target.value })} />
                         </label>
                         <br></br>
                         <label>Số điện thoại:
-                            <input type="text" onChange={e => setPhoneNum(e.target.value)} />
+                            <input type="text" defaultValue={employee.phone}
+                                onChange={e => setEmployee({ ...employee, phone: e.target.value })} />
                         </label>
                         <br></br>
                         <label>Vị trí làm việc:
-                            <input type="text" onChange={e => setPosition(e.target.value)} />
+                            <input type="text" defaultValue={employee.position}
+                                onChange={e => setEmployee({ ...employee, position: e.target.value })} />
                         </label>
                         <br></br>
                     </div>

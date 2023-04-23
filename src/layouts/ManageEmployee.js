@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import SideBar from "./components/SideBar";
 import Workspace from './components/Workspace';
@@ -10,34 +10,48 @@ import Confirm from './components/Confirm';
 import PopupModal from './components/PopupModal';
 import { adminRoutes } from '../routes/routes';
 import config from '../config';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 import classNames from 'classnames/bind';
 import styles from '../css/Manage.module.scss'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
 function ManageEmployee() {
 
     //Lấy thông tin từ BE
-    const listHead = ["Tên", "Giới tính", "Ngày sinh", "Địa chỉ", "Số điện thoại", "Vị trí"]
-    const listRow = [
-        { name: "Nguyễn Văn An", gender: "Nam", doB: '1/1/1990', address: "Hà Nội", phoneNum: "0314526751", position: "Bảo vệ" },
-        { name: "Nguyễn Thị Hồng", gender: "Nữ", doB: '3/4/1989', address: "Hà Nội", phoneNum: "0987625374", position: "Vệ sinh" },
-        { name: "Vũ Văn Nam", gender: "Nam", doB: '10/4/1990', address: "Thái Bình", phoneNum: "0357285904", position: "Bảo vệ" },
-    ]
+    const listHead = ["Tên", "Giới tính", "Ngày sinh", "Địa chỉ", "Số điện thoại", "Vị trí làm việc"]
+    const [employees, setEmployees] = useState([]);
+    const [data, setData] = useState([]);
+    const [searchText, setSearchText] = useState("");
+    const [id, setId] = useState();
 
-    const handleSearch = () => {
 
-    }
+    useEffect(() => {
+        fetch('http://localhost:8080/employees')
+            .then(res => res.json())
+            .then(data => {
+                setEmployees(data)
+                setData(data)
+            })
+            .catch(err => console.log(err))
+    }, []);
 
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            handleSearch()
+    useEffect(() => {
+        if (searchText === "") setEmployees(data)
+        else {
+            setEmployees(
+                data.filter((employee) => {
+                    if (employee.name.toLowerCase().includes(searchText.toLowerCase()) ||
+                        employee.position.toLowerCase().includes(searchText.toLowerCase())) return employee;
+                    else return null;
+                })
+            )
         }
-    }
+    }, [searchText])
+
 
     const handleDelete = () => {
 
@@ -58,20 +72,26 @@ function ManageEmployee() {
         <div className={cx('container')}>
             <Workspace>
                 <h1 className={cx('title')}>Danh Sách Nhân Viên</h1>
-                <Search placeholder="Tìm kiếm" onClick={handleSearch} onKeyDown={handleKeyPress} />
-                <button onClick={toggleModal} className={cx('add')}>Thêm nhân viên</button>
+                <Search placeholder="Tìm kiếm" onChange={e => setSearchText(e.target.value)} />
+                <button onClick={() => {
+                    toggleModal()
+                    setId(-1)
+                }} className={cx('add')}>Thêm nhân viên</button>
                 <Table listHead={listHead}>
                     {
-                        listRow.map((row, index) => {
+                        employees.map((employee) => {
                             return (
-                                <tr key={index}>
-                                    <td>{row.name}</td>
-                                    <td>{row.gender}</td>
-                                    <td>{row.doB}</td>
-                                    <td>{row.address}</td>
-                                    <td>{row.phoneNum}</td>
-                                    <td>{row.position}</td>
-                                    <td><button onClick={toggleModal}>Thay đổi</button>
+                                <tr key={employee.employeeId}>
+                                    <td>{employee.name}</td>
+                                    <td>{employee.gender}</td>
+                                    <td>{employee.dob}</td>
+                                    <td>{employee.address}</td>
+                                    <td>{employee.phone}</td>
+                                    <td>{employee.position}</td>
+                                    <td><button onClick={() => {
+                                        setId(employee.employeeId)
+                                        toggleModal()
+                                    }}>Thay đổi</button>
                                         <button onClick={toggleConfirmModal} ><FontAwesomeIcon icon={faTrashCan} /></button>
                                     </td>
                                 </tr>
@@ -82,7 +102,7 @@ function ManageEmployee() {
 
                 {
                     modal &&
-                    <PopupModal onClick={toggleModal} content={<AdjustEmployee onClick={toggleModal} />} />
+                    <PopupModal onClick={toggleModal} content={<AdjustEmployee id={id} onClick={toggleModal} />} />
                 }
 
                 {

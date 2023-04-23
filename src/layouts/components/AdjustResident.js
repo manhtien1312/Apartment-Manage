@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -8,17 +8,19 @@ import styles from "../../css/AddEntry.module.scss"
 
 const cx = classNames.bind(styles);
 
-function AdjustResident({ onClick, mode }) {
+function AdjustResident({ onClick, id }) {
 
-    const [houseNum, setHouseNum] = useState("");
-    const [name, setName] = useState("")
-    const [gender, setGender] = useState("Nam");
-    const [doB, setDoB] = useState();
-    const [phoneNum, setPhoneNum] = useState("");
-    const [relative, setRelative] = useState("");
+    const [resident, setResident] = useState({});
+
+    useEffect(() => {
+        fetch(`http://localhost:8080/resident/${id}`)
+            .then(res => res.json())
+            .then(data => setResident(data))
+            .catch(err => console.log(err))
+    }, []);
 
     const handleSubmit = () => {
-        // console.log(houseNum, name, gender, doB, phoneNum, relative)
+        console.log(resident)
     }
 
     return (
@@ -31,30 +33,36 @@ function AdjustResident({ onClick, mode }) {
                 <form>
                     <div className={cx('info')}>
                         <label>Số căn hộ:
-                            <input type="text" onChange={e => setHouseNum(e.target.value)} />
+                            <input type="text" defaultValue={resident.apartmentNum}
+                                onChange={e => setResident({ ...resident, apartmentNum: e.target.value })} />
                         </label>
                         <br></br>
                         <label>Tên đầy đủ:
-                            <input type="text" onChange={e => setName(e.target.value)} />
+                            <input type="text" defaultValue={resident.name}
+                                onChange={e => setResident({ ...resident, name: e.target.value })} />
                         </label>
                         <br></br>
                         <label>Giới tính:
-                            <select value={gender} onChange={e => setGender(e.target.value)}>
+                            <select defaultValue={resident.gender}
+                                onChange={e => setResident({ ...resident, gender: e.target.value })}>
                                 <option value="Nam">Nam</option>
                                 <option value="Nữ">Nữ</option>
                             </select>
                         </label>
                         <br></br>
                         <label>Ngày sinh:
-                            <input type="date" onChange={e => setDoB(e.target.value)} />
+                            <input type="date" defaultValue={resident.dob}
+                                onChange={e => setResident({ ...resident, dob: e.target.value })} />
                         </label>
                         <br></br>
                         <label>Số điện thoại:
-                            <input type="text" onChange={e => setPhoneNum(e.target.value)} />
+                            <input type="text" defaultValue={resident.phone}
+                                onChange={e => setResident({ ...resident, phone: e.target.value })} />
                         </label>
                         <br></br>
                         <label>Quan hệ với chủ hộ:
-                            <input type="text" onChange={e => setRelative(e.target.value)} />
+                            <input type="text" defaultValue={resident.relationship}
+                                onChange={e => setResident({ ...resident, relationship: e.target.value })} />
                         </label>
                         <br></br>
                     </div>

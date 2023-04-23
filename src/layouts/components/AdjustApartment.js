@@ -13,12 +13,10 @@ function AdjustApartment({ onClick, id }) {
     const [apartment, setApartment] = useState({});
 
     useEffect(() => {
-        if (id !== "") {
-            fetch(`http://localhost:8080/apartment/${id}`)
-                .then(res => res.json())
-                .then(data => setApartment(data))
-                .catch(err => console.log(err))
-        }
+        fetch(`http://localhost:8080/apartment/${id}`)
+            .then(res => res.json())
+            .then(data => setApartment(data))
+            .catch(err => console.log(err))
     }, []);
 
     const handleSubmit = () => {
@@ -35,7 +33,7 @@ function AdjustApartment({ onClick, id }) {
                 <form>
                     <div className={cx('info')}>
                         <label>Số căn hộ:
-                            <input type="text" defaultValue={apartment.apartmentId}
+                            <input disabled type="text" defaultValue={apartment.apartmentId}
                                 onChange={e => setApartment({ ...apartment, apartmentId: e.target.value })} />
                         </label>
                         <br></br>
