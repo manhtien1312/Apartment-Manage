@@ -21,6 +21,33 @@ function AdjustEmployee({ onClick, id }) {
 
     const handleSubmit = () => {
         console.log(employee)
+
+        if (id >= 0) {
+            fetch(`http://localhost:8080/employee/save/${id}`, {
+                method: "PUT",
+                mode: "cors",
+                body: JSON.stringify(employee),
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                }
+            })
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(err => console.log(err))
+        } else {
+            fetch(`http://localhost:8080/employee/add/${id}`, {
+                method: "POST",
+                mode: "cors",
+                body: JSON.stringify(employee),
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                }
+            })
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(err => console.log(err))
+        }
+
     }
 
     return (
@@ -38,7 +65,7 @@ function AdjustEmployee({ onClick, id }) {
                         </label>
                         <br></br>
                         <label>Giới tính:
-                            <select defaultValue={employee.gender}
+                            <select value={employee.gender || setEmployee({ ...employee, gender: "Nam" })}
                                 onChange={e => setEmployee({ ...employee, gender: e.target.value })}>
                                 <option value="Nam">Nam</option>
                                 <option value="Nữ">Nữ</option>

@@ -52,7 +52,12 @@ function ManageResident() {
     }, [searchText])
 
     const handleDelete = () => {
-
+        fetch(`http://localhost:8080/resident/delete/${id}`)
+            .then(
+                setResidents(residents.filter((resident) => {
+                    return resident.residentId !== id
+                }))
+            )
     }
 
     const [modal, setModal] = useState(false);
@@ -90,7 +95,10 @@ function ManageResident() {
                                         setId(resident.residentId)
                                         setModal(!modal)
                                     }} >Thay đổi</button>
-                                        <button onClick={toggleConfirmModal} ><FontAwesomeIcon icon={faTrashCan} /></button>
+                                        <button onClick={() => {
+                                            setId(resident.residentId)
+                                            toggleConfirmModal()
+                                        }} ><FontAwesomeIcon icon={faTrashCan} /></button>
                                     </td>
                                 </tr>
                             )

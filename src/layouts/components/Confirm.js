@@ -14,7 +14,10 @@ function Confirm({ onClick, handleDelete }) {
             </button>
             <h3>Bạn chắc chắn muốn xóa?</h3>
             <div className={cx('btn')}>
-                <button onClick={handleDelete}>Xác nhận</button>
+                <button onClick={() => {
+                    handleDelete()
+                    onClick()
+                }}>Xác nhận</button>
                 <button onClick={onClick}>Hủy</button>
             </div>
         </div>

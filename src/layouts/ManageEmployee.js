@@ -54,7 +54,12 @@ function ManageEmployee() {
 
 
     const handleDelete = () => {
-
+        fetch(`http://localhost:8080/employee/delete/${id}`)
+            .then(
+                setEmployees(employees.filter((employee) => {
+                    return employee.employeeId !== id
+                }))
+            )
     }
 
     const [modal, setModal] = useState(false);
@@ -92,7 +97,10 @@ function ManageEmployee() {
                                         setId(employee.employeeId)
                                         toggleModal()
                                     }}>Thay đổi</button>
-                                        <button onClick={toggleConfirmModal} ><FontAwesomeIcon icon={faTrashCan} /></button>
+                                        <button onClick={() => {
+                                            setId(employee.employeeId)
+                                            toggleConfirmModal()
+                                        }} ><FontAwesomeIcon icon={faTrashCan} /></button>
                                     </td>
                                 </tr>
                             )

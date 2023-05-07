@@ -21,6 +21,33 @@ function AdjustResident({ onClick, id }) {
 
     const handleSubmit = () => {
         console.log(resident)
+
+        if (id >= 0) {
+            fetch(`http://localhost:8080/resident/save/${id}`, {
+                method: "PUT",
+                mode: "cors",
+                body: JSON.stringify(resident),
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                }
+            })
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(err => console.log(err))
+        } else {
+            fetch(`http://localhost:8080/resident/add/${id}`, {
+                method: "POST",
+                mode: "cors",
+                body: JSON.stringify(resident),
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                }
+            })
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(err => console.log(err))
+        }
+
     }
 
     return (
@@ -43,7 +70,7 @@ function AdjustResident({ onClick, id }) {
                         </label>
                         <br></br>
                         <label>Giới tính:
-                            <select defaultValue={resident.gender}
+                            <select value={resident.gender || setResident({ ...resident, gender: "Nam" })}
                                 onChange={e => setResident({ ...resident, gender: e.target.value })}>
                                 <option value="Nam">Nam</option>
                                 <option value="Nữ">Nữ</option>

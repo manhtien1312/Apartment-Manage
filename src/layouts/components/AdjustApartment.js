@@ -21,6 +21,19 @@ function AdjustApartment({ onClick, id }) {
 
     const handleSubmit = () => {
         console.log(apartment)
+
+        fetch(`http://localhost:8080/apartment/save/${id}`, {
+            method: "PUT",
+            mode: "cors",
+            body: JSON.stringify(apartment),
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+            }
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
+
     }
 
     return (
