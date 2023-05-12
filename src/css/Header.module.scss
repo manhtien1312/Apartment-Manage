@@ -57,7 +57,9 @@
   background-color: var(--primary-color);
 }
 
-.change-password {
+.change-password,
+.logout {
+  width: 100%;
   background-color: transparent;
   border-style: none;
   font-family: var(--primary-font);

@@ -27,6 +27,8 @@ function Header({ to }) {
         setModal(!modal)
     }
 
+    const username = sessionStorage.getItem("user")
+
     return (
 
         <>
@@ -35,7 +37,7 @@ function Header({ to }) {
                     <div className={cx('container')}>
                         <Link to={to}><img className={cx('logo')} src="https://thegardenhill.com.vn/wp-content/uploads/2021/04/logo-bidhomes-the-garden-hill.png" alt="logo" /></Link>
                         <div className={cx('user-info')}>
-                            <h3 className={cx('user-name')}>Nguyễn Văn A</h3>
+                            <h3 className={cx('user-name')}>{username}</h3>
                             <Tippy
                                 visible={visible} onClickOutside={hide}
                                 interactive
@@ -49,7 +51,13 @@ function Header({ to }) {
                                             >
                                                 <PopperItem title='Đổi mật khẩu' icon={<FontAwesomeIcon icon={faKey} />} />
                                             </button>
-                                            <PopperItem title='Đăng xuất' to={config.routes.home} icon={<FontAwesomeIcon icon={faRightFromBracket} />} />
+                                            <br />
+                                            <button
+                                                className={cx('logout')}
+                                                onClick={() => sessionStorage.clear()}
+                                            >
+                                                <PopperItem title='Đăng xuất' to={config.routes.home} icon={<FontAwesomeIcon icon={faRightFromBracket} />} />
+                                            </button>
                                         </Popper>
                                     </div>
                                 )}
