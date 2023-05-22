@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import SideBar from "./components/SideBar";
 import Workspace from './components/Workspace';
@@ -19,21 +19,32 @@ const cx = classNames.bind(styles);
 function ManageService() {
 
     const listHead = ["Số căn hộ", "Hóa đơn gần nhất", "Tình trạng"]
-    const listRow = [
-        { houseNum: "A0803", billName: "Tháng 3", status: "Đã thanh toán" },
-        { houseNum: "A0804", billName: "Tháng 3", status: "Đã thanh toán" },
-        { houseNum: "A0805", billName: "Tháng 3", status: "Đã thanh toán" },
-    ]
+    const [bills, setBills] = useState([]);
+    const [data, setData] = useState([]);
+    const [apartmentId, setApartmentId] = useState();
 
-    const handleSearch = () => {
+    useEffect(() => {
+        fetch('http://localhost:8080/lastest-bills')
+            .then(res => res.json())
+            .then(data => {
+                setBills(data)
+                setData(data)
+            })
+            .catch(err => console.log(err))
+    }, [])
 
-    }
-
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            handleSearch()
+    const [searchText, setSearchText] = useState("")
+    useEffect(() => {
+        if (searchText === "") setBills(data)
+        else {
+            setBills(
+                data.filter((bill) => {
+                    if (bill.apartment.toLowerCase().includes(searchText.toLowerCase())) return bill;
+                    else return null;
+                })
+            )
         }
-    }
+    }, [searchText])
 
     const [modal, setModal] = useState(false);
 
@@ -44,17 +55,24 @@ function ManageService() {
     return (
         <div className={cx('container')}>
             <Workspace>
-                <h1 className={cx('title')}>Danh Sách hóa đơn dịch vụ</h1>
-                <Search onClick={handleSearch} onKeyDown={handleKeyPress} />
+                <h1 className={cx('title')}>Danh Sách Hóa Đơn Dịch Vụ</h1>
+                <Search placeholder="Tìm kiếm" onChange={e => setSearchText(e.target.value)} />
                 <Table listHead={listHead}>
                     {
-                        listRow.map((row, index) => {
+                        bills.map((bill) => {
+                            let check = false
+                            if (bill.status === "Chưa thanh toán") check = true
                             return (
-                                <tr key={index}>
-                                    <td>{row.houseNum}</td>
-                                    <td><Link to={config.routes.billDetail}>{row.billName}</Link></td>
-                                    <td>{row.status}</td>
-                                    <td><button onClick={toggleModal}>Tạo hóa đơn</button></td>
+                                <tr key={bill.id}>
+                                    <td>{bill.apartment}</td>
+                                    <td><Link to={`/manage/services/bill-detail/${bill.id}`}>Tháng {bill.month}/{bill.year}</Link></td>
+                                    <td>{bill.status}</td>
+                                    <td><button
+                                        disabled={check}
+                                        onClick={() => {
+                                            toggleModal()
+                                            setApartmentId(bill.apartment)
+                                        }}>Tạo hóa đơn</button></td>
                                 </tr>
                             )
                         })
@@ -63,7 +81,7 @@ function ManageService() {
 
                 {
                     modal &&
-                    <PopupModal onClick={toggleModal} content={<CreateBill onClick={toggleModal} />} />
+                    <PopupModal onClick={toggleModal} content={<CreateBill apartmentId={apartmentId} onClick={toggleModal} />} />
                 }
 
             </Workspace>

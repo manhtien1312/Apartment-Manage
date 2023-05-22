@@ -10,7 +10,7 @@ const routes = {
     manageResident: '/manage/residents',
     manageEmployee: '/manage/employees',
     manageService: '/manage/services',
-    billDetail: '/manage/services/bill-detail',
+    billDetail: '/manage/services/bill-detail/:id',
     residentApartment: '/resident/apartment',
     residentService: '/resident/service',
 

@@ -29,10 +29,10 @@ const privateRoutes = [
 ]
 
 const adminRoutes = [
-    { title: 'Quản lý mặt bằng', path: config.routes.manageApartment, component: ManageApartment },
+    { title: 'Quản lý căn hộ', path: config.routes.manageApartment, component: ManageApartment },
     { title: 'Quản lý cư dân', path: config.routes.manageResident, component: ManageResident },
     { title: 'Quản lý nhân viên', path: config.routes.manageEmployee, component: ManageEmployee },
-    { title: 'Quản lý dịch vụ', path: config.routes.manageService, component: ManageService },
+    { title: 'Quản lý hóa đơn', path: config.routes.manageService, component: ManageService },
 ]
 
 const userRoutes = [
