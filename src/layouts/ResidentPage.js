@@ -1,6 +1,6 @@
 
 import classNames from "classnames/bind";
-import styles from '../css/ResidentPage.module.scss'
+import styles from '../css/Manage.module.scss'
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 import Workspace from "./components/Workspace";
@@ -11,15 +11,16 @@ const cx = classNames.bind(styles)
 
 function ResidentPage() {
     return (
-
-        <>
-            <Workspace />
+        <div className={cx('container')}>
+            <Workspace>
+                <h1 className={cx('title')}>Thông báo</h1>
+            </Workspace>
 
             <SideBar routes={userRoutes} />
 
             <Header to={config.routes.resident} />
 
-        </>
+        </div>
     );
 }
 

@@ -49,8 +49,8 @@ function Login() {
                 .then(res => res.json())
                 .then(data => {
                     sessionStorage.setItem("user", data.fullName);
-                })
-                .then(() => {
+                    sessionStorage.setItem("id", data.id)
+                    sessionStorage.setItem("role", "manager")
                     navigate(config.routes.manage)
                 })
                 .catch(err => console.log(err))
@@ -66,6 +66,8 @@ function Login() {
                 .then(res => res.json())
                 .then(data => {
                     sessionStorage.setItem("user", data.fullName);
+                    sessionStorage.setItem("id", data.id)
+                    sessionStorage.setItem("role", "resident")
                     navigate(config.routes.resident)
                 })
                 .catch(err => console.log(err))

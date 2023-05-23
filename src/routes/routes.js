@@ -37,7 +37,7 @@ const adminRoutes = [
 
 const userRoutes = [
     { title: 'Thông tin căn hộ', path: config.routes.residentApartment, component: ResidentApartment },
-    { title: 'Hóa đơn dịch vụ', path: config.routes.residentService, component: ResidentService },
+    { title: 'Hóa đơn hiện tại', path: config.routes.residentService, component: ResidentService },
 ]
 
 

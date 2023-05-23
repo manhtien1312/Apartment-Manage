@@ -25,6 +25,37 @@ function ChangePassword({ onClick }) {
 
     const handleSubmit = () => {
 
+        const requestBody = {
+            id: sessionStorage.getItem("id"),
+            username: "",
+            password: newPassword,
+            fullName: sessionStorage.getItem("user"),
+        }
+
+        if (sessionStorage.getItem("role") === "manager") {
+            fetch('http://localhost:8080/manager-account/change-password', {
+                method: "POST",
+                mode: "cors",
+                body: JSON.stringify(requestBody),
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                }
+            })
+                .then(window.location.reload())
+                .catch(err => console.log(err))
+        } else {
+            fetch('http://localhost:8080/resident-account/change-password', {
+                method: "POST",
+                mode: "cors",
+                body: JSON.stringify(requestBody),
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                }
+            })
+                .then(window.location.reload())
+                .catch(err => console.log(err))
+        }
+
     }
 
     return (

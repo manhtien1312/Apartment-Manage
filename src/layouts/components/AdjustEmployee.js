@@ -57,7 +57,7 @@ function AdjustEmployee({ onClick, id }) {
                     <FontAwesomeIcon icon={faXmark} />
                 </button>
                 <h1>Nhân viên</h1>
-                <form>
+                <div>
                     <div className={cx('info')}>
                         <label>Tên đầy đủ:
                             <input type="text" defaultValue={employee.name}
@@ -96,7 +96,7 @@ function AdjustEmployee({ onClick, id }) {
                     <div className={cx('btn')}>
                         <button type="submit" onClick={handleSubmit}>Xác nhận</button>
                     </div>
-                </form>
+                </div>
             </div >
         </div>
     );

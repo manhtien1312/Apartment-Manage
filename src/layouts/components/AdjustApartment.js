@@ -20,7 +20,6 @@ function AdjustApartment({ onClick, id }) {
     }, []);
 
     const handleSubmit = () => {
-        console.log(apartment)
 
         fetch(`http://localhost:8080/apartment/save/${id}`, {
             method: "PUT",
@@ -43,7 +42,7 @@ function AdjustApartment({ onClick, id }) {
                     <FontAwesomeIcon icon={faXmark} />
                 </button>
                 <h1>Căn hộ</h1>
-                <form>
+                <div>
                     <div className={cx('info')}>
                         <label>Số căn hộ:
                             <input disabled type="text" defaultValue={apartment.apartmentId}
@@ -63,7 +62,6 @@ function AdjustApartment({ onClick, id }) {
                         <label>Tình trạng:
                             <select value={apartment.status} onChange={e => setApartment({ ...apartment, status: e.target.value })}>
                                 <option value="Đã bán">Đã bán</option>
-                                <option value="Đã thuê">Đã thuê</option>
                                 <option value="Chưa bàn giao">Chưa bàn giao</option>
                             </select>
                         </label>
@@ -77,7 +75,7 @@ function AdjustApartment({ onClick, id }) {
                     <div className={cx('btn')}>
                         <button onClick={handleSubmit}>Xác nhận</button>
                     </div>
-                </form>
+                </div>
             </div >
         </div>
     );

@@ -57,7 +57,7 @@ function AdjustResident({ onClick, id }) {
                     <FontAwesomeIcon icon={faXmark} />
                 </button>
                 <h1>Cư dân</h1>
-                <form>
+                <div>
                     <div className={cx('info')}>
                         <label>Số căn hộ:
                             <input type="text" defaultValue={resident.apartmentNum}
@@ -96,7 +96,7 @@ function AdjustResident({ onClick, id }) {
                     <div className={cx('btn')}>
                         <button id={cx('change')} type="submit" onClick={handleSubmit}>Xác nhận</button>
                     </div>
-                </form>
+                </div>
             </div >
         </div>
     );

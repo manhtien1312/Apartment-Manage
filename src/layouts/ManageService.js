@@ -13,6 +13,7 @@ import config from '../config';
 import classNames from 'classnames/bind';
 import styles from "../css/Manage.module.scss"
 import { Link } from 'react-router-dom';
+import PriceList from './components/PriceList';
 
 const cx = classNames.bind(styles);
 
@@ -47,9 +48,13 @@ function ManageService() {
     }, [searchText])
 
     const [modal, setModal] = useState(false);
+    const [priceModal, setPriceModal] = useState(false);
 
     const toggleModal = () => {
         setModal(!modal)
+    }
+    const togglePriceModal = () => {
+        setPriceModal(!priceModal)
     }
 
     return (
@@ -57,6 +62,7 @@ function ManageService() {
             <Workspace>
                 <h1 className={cx('title')}>Danh Sách Hóa Đơn Dịch Vụ</h1>
                 <Search placeholder="Tìm kiếm" onChange={e => setSearchText(e.target.value)} />
+                <button onClick={togglePriceModal} className={cx('add')}>Thay đổi bảng giá dịch vụ</button>
                 <Table listHead={listHead}>
                     {
                         bills.map((bill) => {
@@ -82,6 +88,10 @@ function ManageService() {
                 {
                     modal &&
                     <PopupModal onClick={toggleModal} content={<CreateBill apartmentId={apartmentId} onClick={toggleModal} />} />
+                }
+                {
+                    priceModal &&
+                    <PopupModal onClick={toggleModal} content={<PriceList onClick={togglePriceModal} />} />
                 }
 
             </Workspace>
